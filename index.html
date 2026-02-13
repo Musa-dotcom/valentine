@@ -12,6 +12,7 @@
       height: 100vh;
       font-family: Arial, sans-serif;
       overflow: hidden;
+      position: relative;
     }
 
     .card {
@@ -20,10 +21,17 @@
       border-radius: 20px;
       text-align: center;
       box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      position: relative;
+      z-index: 1;
     }
 
     h1 {
       color: red;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      margin-top: 0;
     }
 
     button {
@@ -33,7 +41,6 @@
       border: none;
       border-radius: 10px;
       cursor: pointer;
-      position: relative;
     }
 
     .yes {
@@ -44,7 +51,11 @@
     .no {
       background-color: gray;
       color: white;
-      position: absolute;
+      position: fixed; /* FIXED to viewport, not card */
+      left: 50%;
+      top: 60%;
+      transform: translate(-50%, -50%);
+      z-index: 2;
     }
   </style>
 </head>
@@ -53,24 +64,26 @@
   <div class="card">
     <h1>Baby G 💖</h1>
     <h2>Will you be my Valentine?</h2>
+    <p>From your favourite Young Warlock / Valentine 💕</p>
 
     <button class="yes" onclick="yesClicked()">Yes</button>
     <button class="no" onmouseover="moveButton()">No</button>
   </div>
 
   <script>
+    const noButton = document.querySelector(".no");
+
     function moveButton() {
-      const button = document.querySelector(".no");
+      const padding = 20; // keep button fully visible
+      const x = Math.random() * (window.innerWidth - noButton.offsetWidth - padding*2) + padding;
+      const y = Math.random() * (window.innerHeight - noButton.offsetHeight - padding*2) + padding;
 
-      const x = Math.random() * (window.innerWidth - 100);
-      const y = Math.random() * (window.innerHeight - 50);
-
-      button.style.left = x + "px";
-      button.style.top = y + "px";
+      noButton.style.left = x + "px";
+      noButton.style.top = y + "px";
     }
 
     function yesClicked() {
-      alert("YAY!!! I love you so much Rumbie 💖💖💖");
+      alert("YAY!!! I love you so much Rumbie. I will try harder to always be the man for you. 💖💖💖");
     }
   </script>
 
